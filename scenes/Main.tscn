@@ -1,0 +1,48 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://scripts/Player.gd" type="Script" id=1]
+[ext_resource path="res://assets/sketch.png" type="Texture" id=2]
+[ext_resource path="res://scenes/Rooms.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scripts/TileMap.gd" type="Script" id=4]
+[ext_resource path="res://scripts/Main.gd" type="Script" id=5]
+[ext_resource path="res://resources/tileset.tres" type="TileSet" id=6]
+
+[sub_resource type="AtlasTexture" id=1]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 73.2199, 54.326, 418.995, 420.356 )
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 50.0942
+
+[sub_resource type="AtlasTexture" id=3]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 760.209, 40.7223, 285.678, 457.086 )
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource( 5 )
+
+[node name="Map" type="TileMap" parent="."]
+tile_set = ExtResource( 6 )
+cell_size = Vector2( 128, 128 )
+cell_custom_transform = Transform2D( 128, 0, 0, 128, 0, 0 )
+format = 1
+script = ExtResource( 4 )
+rooms_scene = ExtResource( 3 )
+
+[node name="RigidBody2D" type="KinematicBody2D" parent="."]
+script = ExtResource( 1 )
+speed = 377
+
+[node name="Player" type="Sprite" parent="RigidBody2D"]
+scale = Vector2( 0.2, 0.2 )
+texture = SubResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+shape = SubResource( 2 )
+
+[node name="Zombie" type="Sprite" parent="."]
+position = Vector2( 270.306, 131.337 )
+scale = Vector2( 0.202986, 0.202986 )
+texture = SubResource( 3 )
