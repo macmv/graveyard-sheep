@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/sketch.png" type="Texture" id=2]
@@ -6,11 +6,20 @@
 [ext_resource path="res://scripts/TileMap.gd" type="Script" id=4]
 [ext_resource path="res://scripts/Main.gd" type="Script" id=5]
 [ext_resource path="res://resources/tileset.tres" type="TileSet" id=6]
+[ext_resource path="res://assets/player/frame-5.png" type="Texture" id=7]
+[ext_resource path="res://assets/player/frame-4.png" type="Texture" id=8]
+[ext_resource path="res://assets/player/frame-3.png" type="Texture" id=9]
+[ext_resource path="res://assets/player/frame-0.png" type="Texture" id=10]
+[ext_resource path="res://assets/player/frame-1.png" type="Texture" id=11]
+[ext_resource path="res://assets/player/frame-2.png" type="Texture" id=12]
 
-[sub_resource type="AtlasTexture" id=1]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 73.2199, 54.326, 418.995, 420.356 )
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 9 ), ExtResource( 8 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "default",
+"speed": 15.0
+} ]
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 50.0942
@@ -32,17 +41,23 @@ script = ExtResource( 4 )
 rooms_scene = ExtResource( 3 )
 
 [node name="RigidBody2D" type="KinematicBody2D" parent="."]
+position = Vector2( 164.808, 162.014 )
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
 speed = 377
 
-[node name="Player" type="Sprite" parent="RigidBody2D"]
+[node name="Player" type="AnimatedSprite" parent="RigidBody2D"]
 scale = Vector2( 0.2, 0.2 )
-texture = SubResource( 1 )
+frames = SubResource( 4 )
+frame = 4
+playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
 shape = SubResource( 2 )
 
 [node name="Zombie" type="Sprite" parent="."]
-position = Vector2( 270.306, 131.337 )
+position = Vector2( 333.156, 173.237 )
 scale = Vector2( 0.202986, 0.202986 )
 texture = SubResource( 3 )
