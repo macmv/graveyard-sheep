@@ -1,0 +1,177 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://assets/level/1/background.png" type="Texture" id=1]
+[ext_resource path="res://assets/effects/light.png" type="Texture" id=2]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform sampler2D curve;
+uniform sampler2D noise;
+
+void fragment() {
+  COLOR = vec4(texture(TEXTURE, UV).xyz, 1);
+}
+
+void light() {
+  float dist = length(LIGHT_UV - vec2(0.5)) * 2.0;
+  float curve_amount = texture(curve, vec2(dist, 0)).x;
+  LIGHT_COLOR = vec4(curve_amount);
+  LIGHT_COLOR.a = 1.0;
+  LIGHT = LIGHT_COLOR;
+}
+"
+custom_defines = ""
+
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0, 0.994369 ), 0.0, -1.17123, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=3]
+curve = SubResource( 2 )
+
+[sub_resource type="OpenSimplexNoise" id=4]
+octaves = 5
+period = 0.1
+persistence = 0.598
+
+[sub_resource type="NoiseTexture" id=5]
+width = 256
+height = 256
+noise = SubResource( 4 )
+
+[sub_resource type="ShaderMaterial" id=6]
+shader = SubResource( 1 )
+shader_param/curve = SubResource( 3 )
+shader_param/noise = SubResource( 5 )
+
+[sub_resource type="OccluderPolygon2D" id=7]
+polygon = PoolVector2Array( 506.6, 1163.4, 435.89, 1170.47, 430.233, 956.929, 295.883, 836.72, 46.921, 846.107, 56.8805, 1550.9, 150.219, 1644.24, 151.633, 1862.03, 222.343, 2260.83, 324.167, 2239.62, 394.877, 2245.28, 421.747, 2352.76, 380.735, 2406.5, 312.853, 2430.54, 171.432, 2395.18, 219.515, 3226.74, 605.595, 3349.78, 1208.05, 3366.75, 1318.36, 3272, 1686.05, 3239.47, 1721.41, 3120.68, 1782.22, 2755.81, 1729.9, 2290.53, 1595.54, 2262.25, 1572.92, 2044.46, 1703.03, 2044.46, 1707.27, 1845.05, 1775.15, 1784.24, 1782.22, 1620.19, 1876.97, 1545.24, 1864.25, 852.276, 1649.28, 843.791, 1611.1, 937.129, 1523.42, 968.242, 1514.93, 1126.63, 1420.18, 1126.63, 1400.72, 918.574, 1405.32, 797.925, 1434.32, 741.968, 1855.76, 741.968, 1845.78, 73.1735, 1912.54, -16.0205, 1913.43, 3428.63, 0.75, 3451.08, -22.58, -7.51099, 1913.59, -15.4345, 1845.52, 72.9152, 66.7797, 68.802, 55.2454, 735.511, 346.794, 753.281, 440.132, 732.068, 520.742, 801.365, 546.198, 879.146, 515.085, 965.414 )
+
+[sub_resource type="OccluderPolygon2D" id=8]
+polygon = PoolVector2Array( 1428.43, 1396.2, 1430.68, 1606.66, 1357.16, 1653.24, 1155.53, 1641.75, 1139.18, 1655.69, 1139.4, 1718.34, 1148.94, 1734.62, 1613.64, 1728.45, 1611.39, 1644.82, 1521.6, 1625.74, 1522.16, 1404.61 )
+
+[sub_resource type="OccluderPolygon2D" id=9]
+polygon = PoolVector2Array( 313.555, 1641.89, 315.142, 1731.98, 434.991, 1747.85, 482.613, 1788.73, 531.822, 1792.7, 586.985, 1758.17, 781.838, 1758.96, 795.728, 1793.89, 1049.32, 1971.68, 1087.81, 1920.48, 800.093, 1723.25, 779.457, 1643.48, 604.446, 1648.24, 498.09, 1612.53, 499.28, 1403.39, 402.449, 1406.16, 392.528, 1640.31 )
+
+[node name="Level" type="StaticBody2D"]
+
+[node name="background" type="Sprite" parent="."]
+material = SubResource( 6 )
+position = Vector2( 960, 1708 )
+scale = Vector2( 2.78443, 2.78443 )
+texture = ExtResource( 1 )
+region_rect = Rect2( 0, 0, 100, 100 )
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource( 7 )
+
+[node name="LightOccluder2D2" type="LightOccluder2D" parent="."]
+occluder = SubResource( 8 )
+
+[node name="LightOccluder2D3" type="LightOccluder2D" parent="."]
+occluder = SubResource( 9 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2( 964.374, 1711.52 )
+scale = Vector2( 2.78329, 2.78329 )
+polygon = PoolVector2Array( -324.52, -593.133, -325.719, -348.782, -217.811, -343.267, -186.397, -349.501, -163.137, -330.078, -149.949, -298.185, -161.938, -263.175, -164.576, -198.19, -189.755, -196.752, -190.954, -272.767, -211.816, -276.124, -230.28, -294.348, -240.591, -319.287, -331.731, -314.253, -329.499, -55.9935, -293.929, -26.532, -291.856, -14.6943, -234.452, -14.6943, -233.546, -25.2686, -206.355, -25.8729, -201.521, -109.863, -164.964, -110.769, -162.547, -64.2425, -139.284, -68.4722, -119.948, -53.6682, -126.594, -24.3622, -65.2634, -25.8729, -56.1997, 3.13098, 46.22, 74.7341, 31.416, 94.3721, -79.1611, 17.6328, -134.148, 18.2371, -145.024, 30.9262, -169.194, 32.4368, -189.134, 13.4031, -233.244, 7.66272, -292.46, 10.9861, -292.133, 53.9483, -266.983, 99.2184, -267.517, 202.078, -233.114, 190.308, -205.274, 193.93, -181.735, 180.576, -173.361, 200.946, -173.587, 224.033, -193.505, 233.539, -212.97, 252.325, -239.225, 259.794, -284.007, 245.292, -288.808, 368.206, -282.492, 489.096, -257.821, 549.075, -128.767, 585.111, -60.2081, 541.557, -46.4964, 561.318, -103.216, 606.991, -143.514, 669.074, 151.443, 666.025, 66.7762, 608.69, 4.17938, 559.349, 16.2917, 548.044, 87.8885, 596.493, 130.954, 563.117, 258.267, 548.852, 274.417, 501.749, 231.351, 481.561, 193.669, 510.631, 141.721, 500.134, 108.345, 459.49, 120.188, 413.195, 139.298, 423.961, 175.097, 406.735, 218.701, 414.809, 232.159, 436.881, 275.016, 445.507, 292.82, 375.648, 290.082, 280.655, 272.861, 206.903, 224.467, 199.644, 123.847, 191.175, 123.04, 163.953, 216.804, 121.003, 266.005, 119.39, 268.626, 48.815, 289.396, 25.4246, 284.341, 7.16003, 233.784, 6.1438, 62.5514, 7.41412, 65.8541, -24.3427, 140.8, -20.0238, 167.476, -36.7913, 167.222, -113.516, 198.47, -111.483, 203.806, -28.4075, 234.546, -16.213, 288.66, -15.1967, 293.832, -32.6486, 325.288, -59.6688, 319.15, -312.265, 244.828, -312.567, 226.096, -278.125, 198.301, -267.853, 198.301, -209.241, 161.14, -209.845, 156.513, -284.981, 127.688, -293.799, 127.009, -316.859, 165.672, -344.29, 319.755, -347.009, 318.41, -588.752, 344.497, -613.478, 344.431, 616.614, -6.57837, 733.096, -343.119, 611.492, -349.705, -614.686, 343.216, -615.079, 316.649, -591.392 )
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="."]
+position = Vector2( 0, -0.00012207 )
+polygon = PoolVector2Array( 1493.59, 2459.82, 1595.83, 2537.69, 1606.95, 2741.63, 1684.29, 2741.63, 1682.17, 2515.97, 1629.73, 2497.43, 1574.11, 2401.02 )
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( 271.899, 2605.38, 240.272, 2633, 242.945, 2710.95, 271.454, 2743.47, 290.88, 2747.13, 301.589, 2605.38 )
+
+[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( 264.422, 3018.64, 286.47, 3103.68, 365.845, 3149.04, 412.462, 3128.25, 301.589, 2995.33 )
+
+[node name="Lights" type="Node2D" parent="."]
+
+[node name="Light2D" type="Light2D" parent="Lights"]
+use_parent_material = true
+position = Vector2( 1386.35, 1071.62 )
+scale = Vector2( 3.16577, 3.16577 )
+texture = ExtResource( 2 )
+shadow_enabled = true
+shadow_color = Color( 0, 0, 0, 1 )
+
+[node name="Light2D2" type="Light2D" parent="Lights"]
+use_parent_material = true
+position = Vector2( 540.902, 1050.43 )
+scale = Vector2( 3.0195, 3.0195 )
+texture = ExtResource( 2 )
+shadow_enabled = true
+shadow_color = Color( 0, 0, 0, 1 )
+
+[node name="Light2D10" type="Light2D" parent="Lights"]
+use_parent_material = true
+position = Vector2( 163.755, 915.733 )
+scale = Vector2( 3.0195, 3.0195 )
+texture = ExtResource( 2 )
+shadow_enabled = true
+shadow_color = Color( 0, 0, 0, 1 )
+
+[node name="Light2D11" type="Light2D" parent="Lights"]
+use_parent_material = true
+position = Vector2( 1723.98, 900.018 )
+scale = Vector2( 3.4146, 3.4146 )
+texture = ExtResource( 2 )
+shadow_enabled = true
+shadow_color = Color( 0, 0, 0, 1 )
+
+[node name="Light2D3" type="Light2D" parent="Lights"]
+use_parent_material = true
+position = Vector2( 91.6899, 423.226 )
+scale = Vector2( 2.97528, 2.97528 )
+texture = ExtResource( 2 )
+shadow_enabled = true
+shadow_color = Color( 0, 0, 0, 1 )
+
+[node name="Light2D4" type="Light2D" parent="Lights"]
+use_parent_material = true
+position = Vector2( 574.805, 115.982 )
+scale = Vector2( 3.01338, 3.01338 )
+texture = ExtResource( 2 )
+shadow_enabled = true
+shadow_color = Color( 0, 0, 0, 1 )
+
+[node name="Light2D5" type="Light2D" parent="Lights"]
+use_parent_material = true
+position = Vector2( 1339.74, 88.4356 )
+scale = Vector2( 3.53405, 3.53405 )
+texture = ExtResource( 2 )
+shadow_enabled = true
+shadow_color = Color( 0, 0, 0, 1 )
+
+[node name="Light2D6" type="Light2D" parent="Lights"]
+use_parent_material = true
+position = Vector2( 1808.02, 406.275 )
+scale = Vector2( 4.05472, 4.05472 )
+texture = ExtResource( 2 )
+shadow_enabled = true
+shadow_color = Color( 0, 0, 0, 1 )
+
+[node name="Light2D7" type="Light2D" parent="Lights"]
+use_parent_material = true
+position = Vector2( 445.782, 2233.64 )
+scale = Vector2( 1.92943, 1.92943 )
+texture = ExtResource( 2 )
+shadow_enabled = true
+shadow_color = Color( 0, 0, 0, 1 )
+
+[node name="Light2D8" type="Light2D" parent="Lights"]
+use_parent_material = true
+position = Vector2( 237.417, 2464.93 )
+scale = Vector2( 2.23892, 2.23892 )
+texture = ExtResource( 2 )
+shadow_enabled = true
+shadow_color = Color( 0, 0, 0, 1 )
+
+[node name="Light2D9" type="Light2D" parent="Lights"]
+use_parent_material = true
+position = Vector2( 1574.01, 2493.5 )
+scale = Vector2( 2.636, 2.636 )
+texture = ExtResource( 2 )
+shadow_enabled = true
+shadow_color = Color( 0, 0, 0, 1 )

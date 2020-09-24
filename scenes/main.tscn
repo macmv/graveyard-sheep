@@ -1,125 +1,88 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scripts/tile-map.gd" type="Script" id=1]
 [ext_resource path="res://scenes/player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://assets/level/1/background.png" type="Texture" id=3]
+[ext_resource path="res://scenes/levels/1.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/enemies/zombie.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scripts/wool.gd" type="Script" id=7]
 [ext_resource path="res://scenes/rooms.tscn" type="PackedScene" id=8]
-[ext_resource path="res://scripts/main.gd" type="Script" id=9]
 [ext_resource path="res://resources/tileset.tres" type="TileSet" id=11]
 [ext_resource path="res://assets/ui/wool/full.png" type="Texture" id=13]
 [ext_resource path="res://assets/ui/wool/empty.png" type="Texture" id=15]
 
-[sub_resource type="VisualShaderNodeTexture" id=2]
-source = 2
-texture = ExtResource( 3 )
+[node name="Root" type="Node2D"]
 
-[sub_resource type="VisualShaderNodeVectorOp" id=5]
-default_input_values = [ 0, Vector3( 0, 0, 0 ), 1, Vector3( 2, 2, 2 ) ]
-operator = 3
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[sub_resource type="VisualShaderNodeVectorOp" id=6]
-
-[sub_resource type="OpenSimplexNoise" id=9]
-octaves = 5
-period = 0.1
-lacunarity = 2.51
-
-[sub_resource type="NoiseTexture" id=7]
-width = 463
-seamless = true
-noise = SubResource( 9 )
-
-[sub_resource type="VisualShaderNodeTexture" id=8]
-texture = SubResource( 7 )
-texture_type = 1
-
-[sub_resource type="VisualShader" id=3]
-code = "shader_type canvas_item;
-uniform sampler2D tex_frg_6 : hint_albedo;
-
-
-
-void vertex() {
-// Output:0
-
+[node name="Gui" type="MarginContainer" parent="CanvasLayer"]
+margin_right = 1920.0
+margin_bottom = 1080.0
+__meta__ = {
+"_edit_use_anchors_": false
 }
 
-void fragment() {
-// Texture:6
-	vec4 tex_frg_6_read = texture(tex_frg_6, UV.xy);
-	vec3 n_out6p0 = tex_frg_6_read.rgb;
-	float n_out6p1 = tex_frg_6_read.a;
+[node name="Top" type="MarginContainer" parent="CanvasLayer/Gui"]
+margin_right = 1920.0
+margin_bottom = 100.0
+size_flags_vertical = 0
+custom_constants/margin_right = 50
+custom_constants/margin_top = 50
+custom_constants/margin_left = 50
 
-// Texture:3
-	vec3 n_out3p0;
-	float n_out3p1;
-	{
-		vec4 _tex_read = texture(TEXTURE , UV.xy);
-		n_out3p0 = _tex_read.rgb;
-		n_out3p1 = _tex_read.a;
-	}
+[node name="WoolHBox" type="HBoxContainer" parent="CanvasLayer/Gui/Top"]
+margin_left = 1780.0
+margin_top = 50.0
+margin_right = 1870.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 0, 50 )
+size_flags_horizontal = 14
+size_flags_vertical = 0
 
-// VectorOp:5
-	vec3 n_out5p0 = n_out6p0 + n_out3p0;
+[node name="WoolMargin" type="MarginContainer" parent="CanvasLayer/Gui/Top/WoolHBox"]
+margin_top = -3.8147e-06
+margin_right = 90.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+size_flags_horizontal = 4
+size_flags_vertical = 8
+size_flags_stretch_ratio = 0.0
+custom_constants/margin_right = 20
+custom_constants/margin_left = 20
+script = ExtResource( 7 )
+filled_texture = ExtResource( 13 )
+empty_texture = ExtResource( 15 )
+image_path = NodePath("WoolImage")
 
-// VectorOp:4
-	vec3 n_in4p1 = vec3(2.00000, 2.00000, 2.00000);
-	vec3 n_out4p0 = n_out5p0 / n_in4p1;
+[node name="WoolImage" type="TextureRect" parent="CanvasLayer/Gui/Top/WoolHBox/WoolMargin"]
+margin_left = 19.0
+margin_top = -3.8147e-06
+margin_right = 69.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
+size_flags_horizontal = 4
+size_flags_vertical = 8
+size_flags_stretch_ratio = 0.0
+texture = ExtResource( 15 )
+expand = true
 
-// Output:0
-	COLOR.rgb = n_out4p0;
+[node name="Background" parent="." instance=ExtResource( 3 )]
+position = Vector2( 0.943848, 0 )
 
-}
+[node name="player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 962.121, 537.68 )
+sprite_path = NodePath("../player/Player")
+wool_path = NodePath("../CanvasLayer/Gui/Top/WoolHBox/WoolMargin")
 
-void light() {
-// Output:0
+[node name="Camera2D" type="Camera2D" parent="player"]
+current = true
+limit_left = 0
+limit_top = 0
+limit_right = 1920
+limit_smoothed = true
+smoothing_enabled = true
 
-}
-"
-custom_defines = ""
-graph_offset = Vector2( -490.385, 208 )
-mode = 1
-flags/light_only = false
-nodes/fragment/0/position = Vector2( 1040, 460 )
-nodes/fragment/3/node = SubResource( 2 )
-nodes/fragment/3/position = Vector2( -500, 560 )
-nodes/fragment/4/node = SubResource( 5 )
-nodes/fragment/4/position = Vector2( 449.23, 477 )
-nodes/fragment/5/node = SubResource( 6 )
-nodes/fragment/5/position = Vector2( -20, 360 )
-nodes/fragment/6/node = SubResource( 8 )
-nodes/fragment/6/position = Vector2( -520, 40 )
-nodes/fragment/connections = PoolIntArray( 5, 0, 4, 0, 4, 0, 0, 0, 6, 0, 5, 0, 3, 0, 5, 1 )
-
-[sub_resource type="ShaderMaterial" id=4]
-shader = SubResource( 3 )
-
-[sub_resource type="SpriteFrames" id=1]
-animations = [ {
-"frames": [ ExtResource( 15 ), ExtResource( 13 ) ],
-"loop": true,
-"name": "default",
-"speed": 5.0
-} ]
-
-[node name="Node2D" type="Node2D"]
-script = ExtResource( 9 )
-
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
-position = Vector2( 964.374, 1711.52 )
-scale = Vector2( 2.78329, 2.78329 )
-polygon = PoolVector2Array( -324.52, -593.133, -325.719, -348.782, -217.811, -343.267, -186.397, -349.501, -163.137, -330.078, -149.949, -298.185, -161.938, -263.175, -164.576, -198.19, -189.755, -196.752, -190.954, -272.767, -211.816, -276.124, -230.28, -294.348, -240.591, -319.287, -331.731, -314.253, -329.499, -55.9935, -293.929, -26.532, -292.133, 53.9483, -266.983, 99.2184, -258.418, 546.623, -128.767, 585.111, -60.2081, 541.557, -46.4964, 561.318, -103.216, 606.991, 66.7762, 608.69, 4.17938, 559.349, 16.2917, 548.044, 87.8885, 596.493, 130.954, 563.117, 258.267, 548.852, 274.417, 501.749, 231.351, 481.561, 193.669, 510.631, 141.721, 500.134, 108.345, 459.49, 120.188, 413.195, 139.298, 423.961, 175.097, 406.735, 218.701, 414.809, 232.159, 436.881, 270.111, 441.456, 275.494, 372.82, 230.275, 366.091, 227.314, 290.457, 267.215, 293.811, 272.861, 206.903, 224.467, 199.644, 123.847, 191.175, 123.04, 163.953, 216.804, 121.003, 266.005, 119.39, 268.626, 48.815, 289.396, 25.4246, 293.832, -32.6486, 325.288, -59.6688, 319.15, -312.265, 244.828, -312.567, 226.096, -278.125, 198.301, -267.853, 198.301, -209.241, 161.14, -209.845, 156.513, -284.981, 127.688, -293.799, 127.009, -316.859, 165.672, -344.29, 319.755, -347.009, 318.41, -588.752, 344.497, -613.478, 344.431, 616.614, -343.119, 611.492, -349.705, -614.686, 343.216, -615.079, 316.649, -591.392 )
-
-[node name="background" type="Sprite" parent="StaticBody2D"]
-material = SubResource( 4 )
-use_parent_material = true
-position = Vector2( 963.485, 1706.8 )
-scale = Vector2( 2.78329, 2.78329 )
-texture = ExtResource( 3 )
+[node name="zombie" parent="." instance=ExtResource( 5 )]
+position = Vector2( 533.648, 198.671 )
 
 [node name="Map" type="TileMap" parent="."]
 visible = false
@@ -129,16 +92,3 @@ cell_custom_transform = Transform2D( 128, 0, 0, 128, 0, 0 )
 format = 1
 script = ExtResource( 1 )
 rooms_scene = ExtResource( 8 )
-
-[node name="player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 284.5, 238 )
-sprite_path = NodePath("../player/Player")
-
-[node name="zombie" parent="." instance=ExtResource( 5 )]
-position = Vector2( 533.648, 198.671 )
-
-[node name="Wool" type="AnimatedSprite" parent="."]
-position = Vector2( 1839.14, 84.2702 )
-scale = Vector2( 0.244374, 0.244374 )
-frames = SubResource( 1 )
-script = ExtResource( 7 )

@@ -1,4 +1,4 @@
-extends Node2D
+extends Viewport
 
 func _ready():
   randomize()
