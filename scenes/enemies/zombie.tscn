@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/sketch.png" type="Texture" id=1]
+
+[sub_resource type="AtlasTexture" id=1]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 760.209, 40.7223, 285.678, 457.086 )
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 143.487
+height = 177.826
+
+[node name="Zombie" type="KinematicBody2D"]
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 0.361547, 0.361547 )
+texture = SubResource( 1 )
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+scale = Vector2( 0.361547, 0.361547 )
+shape = SubResource( 2 )

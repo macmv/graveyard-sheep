@@ -1,0 +1,90 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://scripts/TileMap.gd" type="Script" id=1]
+[ext_resource path="res://assets/player/frame-4.png" type="Texture" id=2]
+[ext_resource path="res://assets/player/frame-3.png" type="Texture" id=3]
+[ext_resource path="res://assets/player/frame-5.png" type="Texture" id=4]
+[ext_resource path="res://scenes/enemies/zombie.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/player/frame-2.png" type="Texture" id=6]
+[ext_resource path="res://scripts/Wool.gd" type="Script" id=7]
+[ext_resource path="res://scenes/rooms.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scripts/Main.gd" type="Script" id=9]
+[ext_resource path="res://assets/player/frame-1.png" type="Texture" id=10]
+[ext_resource path="res://resources/tileset.tres" type="TileSet" id=11]
+[ext_resource path="res://scripts/Player.gd" type="Script" id=12]
+[ext_resource path="res://assets/ui/wool/full.png" type="Texture" id=13]
+[ext_resource path="res://assets/player/frame-0.png" type="Texture" id=14]
+[ext_resource path="res://assets/ui/wool/empty.png" type="Texture" id=15]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 14 ), ExtResource( 10 ), ExtResource( 6 ), ExtResource( 3 ), ExtResource( 2 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "default",
+"speed": 15.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 30.0013
+height = 84.3461
+
+[sub_resource type="RayShape2D" id=3]
+length = 107.71
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ ExtResource( 15 ), ExtResource( 13 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource( 9 )
+
+[node name="Map" type="TileMap" parent="."]
+tile_set = ExtResource( 11 )
+cell_size = Vector2( 128, 128 )
+cell_custom_transform = Transform2D( 128, 0, 0, 128, 0, 0 )
+format = 1
+script = ExtResource( 1 )
+rooms_scene = ExtResource( 8 )
+
+[node name="RigidBody2D" type="KinematicBody2D" parent="."]
+position = Vector2( 197.362, 218.16 )
+script = ExtResource( 12 )
+__meta__ = {
+"_edit_group_": true
+}
+friction_multiplier = 0.821
+moving_multiplier = 1.039
+acceleration_multiplier = 0.208
+sprite_path = NodePath("Player")
+wool_path = NodePath("../Wool")
+
+[node name="Player" type="AnimatedSprite" parent="RigidBody2D"]
+position = Vector2( -55.248, 29.427 )
+rotation = 0.18326
+scale = Vector2( 0.5, 0.5 )
+frames = SubResource( 1 )
+frame = 4
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+rotation = 1.5708
+shape = SubResource( 2 )
+
+[node name="Hit trigger" type="Area2D" parent="RigidBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D/Hit trigger"]
+rotation = -1.5708
+shape = SubResource( 3 )
+
+[node name="zombie" parent="." instance=ExtResource( 5 )]
+position = Vector2( 533.648, 198.671 )
+
+[node name="Wool" type="AnimatedSprite" parent="."]
+position = Vector2( 1839.14, 84.2702 )
+scale = Vector2( 0.244374, 0.244374 )
+frames = SubResource( 4 )
+script = ExtResource( 7 )
