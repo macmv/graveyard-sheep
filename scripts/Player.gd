@@ -20,7 +20,7 @@ func _physics_process(delta):
   var move_vec = Vector2(x, y)
   if move_vec.length_squared() > 1e-05:
     sprite.play()
+    rotation = -move_vec.angle_to(Vector2(1, 0))
   else:
     sprite.stop()
-  self.rotation = -move_vec.angle_to(Vector2(1, 0))
   move_and_slide(move_vec * speed)

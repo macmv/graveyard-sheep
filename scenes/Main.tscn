@@ -63,10 +63,11 @@ sprite_path = NodePath("Player")
 wool_path = NodePath("../Wool")
 
 [node name="Player" type="AnimatedSprite" parent="RigidBody2D"]
-position = Vector2( -17.452, 14.036 )
+position = Vector2( -17.452, 11.436 )
+rotation = 0.139626
 scale = Vector2( 0.2, 0.2 )
 frames = SubResource( 1 )
-frame = 3
+frame = 4
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
@@ -79,7 +80,7 @@ scale = Vector2( 0.202986, 0.202986 )
 texture = SubResource( 3 )
 
 [node name="Wool" type="AnimatedSprite" parent="."]
-position = Vector2( 980.385, 36.3987 )
+position = Vector2( 1839.14, 84.2702 )
 scale = Vector2( 0.244374, 0.244374 )
 frames = SubResource( 4 )
 script = ExtResource( 13 )

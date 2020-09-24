@@ -11,7 +11,7 @@ func set_total(amount):
   if len(children) < amount:
     while len(children) < amount:
       var inst = self.duplicate()
-      inst.position.y += len(children) * 100 + 100
+      inst.position.x -= len(children) * 100 + 100
       self.get_parent().add_child(inst)
       children.push_back(inst)
   elif len(children) > amount:
