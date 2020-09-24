@@ -1,10 +1,7 @@
 extends AnimatedSprite
 class_name Wool
 
-var children
-
-func _ready():
-  children = []
+var children = []
 
 func set_total(amount):
   amount -= 1
