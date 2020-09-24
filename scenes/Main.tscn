@@ -58,7 +58,7 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
 }
-speed = 1000
+speed = 200
 sprite_path = NodePath("Player")
 wool_path = NodePath("../Wool")
 
@@ -66,7 +66,7 @@ wool_path = NodePath("../Wool")
 position = Vector2( -17.452, 14.036 )
 scale = Vector2( 0.2, 0.2 )
 frames = SubResource( 1 )
-frame = 4
+frame = 3
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]

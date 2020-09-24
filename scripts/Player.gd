@@ -18,6 +18,9 @@ func _physics_process(delta):
   var y = Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
   var x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
   var move_vec = Vector2(x, y)
-  if move_vec.length() > 1e-05:
+  if move_vec.length_squared() > 1e-05:
     sprite.play()
+  else:
+    sprite.stop()
+  self.rotation = -move_vec.angle_to(Vector2(1, 0))
   move_and_slide(move_vec * speed)
