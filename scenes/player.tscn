@@ -21,19 +21,26 @@ code = "shader_type canvas_item;
 
 uniform float shadow_opacity;
 uniform float shadow_shade;
+uniform vec2 shadow_offset;
+uniform vec2 shadow_strech;
 
 void fragment() {
-  vec4 input = texture(TEXTURE, UV);
-  input.rgb = vec3(shadow_shade);
-  float lumi = (input.r + input.g + input.b) / 3.0;
-  COLOR = vec4(vec3(lumi), input.a * shadow_opacity);
+  vec4 color = texture(TEXTURE, UV);
+  vec4 shadow_color = texture(TEXTURE, (UV + shadow_offset) / shadow_strech);
+  if (color.a != 1.0) {
+    COLOR = color + vec4(vec3(shadow_shade), shadow_color.a * shadow_opacity);
+  } else {
+    COLOR = color;
+  }
 }"
 custom_defines = ""
 
 [sub_resource type="ShaderMaterial" id=8]
 shader = SubResource( 7 )
-shader_param/shadow_opacity = null
-shader_param/shadow_shade = null
+shader_param/shadow_opacity = 0.404
+shader_param/shadow_shade = 0.165
+shader_param/shadow_offset = Vector2( -0.051, 0.102 )
+shader_param/shadow_strech = Vector2( 1, 1.765 )
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -74,7 +81,6 @@ attack_animation_path = NodePath("AttackAnimation")
 [node name="Player" type="AnimatedSprite" parent="."]
 material = SubResource( 8 )
 position = Vector2( -55.248, 29.427 )
-rotation = 0.18326
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 1 )
 
