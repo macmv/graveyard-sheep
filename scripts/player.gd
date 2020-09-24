@@ -6,14 +6,20 @@ export(float) var moving_multiplier       = 1.04
 export(float) var acceleration_multiplier = 0.2
 export(NodePath) var sprite_path
 export(NodePath) var wool_path
+export(NodePath) var collision_ray_path
+export(NodePath) var attack_animation_path
 var sprite
 var wool
 var vel
+var collision_ray
+var attack_animation
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
   sprite = get_node(sprite_path) as AnimatedSprite
   wool = get_node(wool_path) as Wool
+  collision_ray = get_node(collision_ray_path) as Area2D
+  attack_animation = get_node(attack_animation_path) as AnimatedSprite
   vel = Vector2(0, 0)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -32,3 +38,9 @@ func _physics_process(delta):
     sprite.stop()
   vel *= friction_multiplier
   move_and_slide(vel * speed)
+
+  if Input.is_action_pressed("attack"):
+    for body in collision_ray.get_overlapping_bodies():
+      body.get_parent().remove_child(body)
+      attack_animation.show()
+      attack_animation.play()
