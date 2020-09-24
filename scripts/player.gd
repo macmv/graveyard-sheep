@@ -39,8 +39,9 @@ func _physics_process(delta):
   vel *= friction_multiplier
   move_and_slide(vel * speed)
 
-  if Input.is_action_pressed("attack"):
+  if Input.is_action_just_pressed("attack"):
+    attack_animation.show()
+    attack_animation.play()
+    attack_animation.frame = 0
     for body in collision_ray.get_overlapping_bodies():
       body.get_parent().remove_child(body)
-      attack_animation.show()
-      attack_animation.play()
