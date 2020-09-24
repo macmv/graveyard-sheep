@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/sketch.png" type="Texture" id=2]
@@ -12,8 +12,11 @@
 [ext_resource path="res://assets/player/frame-0.png" type="Texture" id=10]
 [ext_resource path="res://assets/player/frame-1.png" type="Texture" id=11]
 [ext_resource path="res://assets/player/frame-2.png" type="Texture" id=12]
+[ext_resource path="res://scripts/Wool.gd" type="Script" id=13]
+[ext_resource path="res://assets/ui/wool/full.png" type="Texture" id=14]
+[ext_resource path="res://assets/ui/wool/empty.png" type="Texture" id=15]
 
-[sub_resource type="SpriteFrames" id=4]
+[sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 9 ), ExtResource( 8 ), ExtResource( 7 ) ],
 "loop": true,
@@ -21,13 +24,22 @@ animations = [ {
 "speed": 15.0
 } ]
 
-[sub_resource type="CircleShape2D" id=2]
-radius = 50.0942
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 17.784
+height = 31.642
 
 [sub_resource type="AtlasTexture" id=3]
 flags = 4
 atlas = ExtResource( 2 )
 region = Rect2( 760.209, 40.7223, 285.678, 457.086 )
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ ExtResource( 15 ), ExtResource( 14 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 5 )
@@ -41,23 +53,33 @@ script = ExtResource( 4 )
 rooms_scene = ExtResource( 3 )
 
 [node name="RigidBody2D" type="KinematicBody2D" parent="."]
-position = Vector2( 164.808, 162.014 )
+position = Vector2( 208.306, 188.455 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
 }
-speed = 377
+speed = 1000
+sprite_path = NodePath("Player")
+wool_path = NodePath("../Wool")
 
 [node name="Player" type="AnimatedSprite" parent="RigidBody2D"]
+position = Vector2( -17.452, 14.036 )
 scale = Vector2( 0.2, 0.2 )
-frames = SubResource( 4 )
+frames = SubResource( 1 )
 frame = 4
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+rotation = 1.5708
 shape = SubResource( 2 )
 
 [node name="Zombie" type="Sprite" parent="."]
 position = Vector2( 333.156, 173.237 )
 scale = Vector2( 0.202986, 0.202986 )
 texture = SubResource( 3 )
+
+[node name="Wool" type="AnimatedSprite" parent="."]
+position = Vector2( 980.385, 36.3987 )
+scale = Vector2( 0.244374, 0.244374 )
+frames = SubResource( 4 )
+script = ExtResource( 13 )
