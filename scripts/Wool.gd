@@ -18,7 +18,6 @@ func set_total(amount):
     while len(children) > amount:
       var inst = children.pop_back()
       self.get_parent().remove_child(inst)
-  print("Setting wool to:", amount)
 
 func set_amount(amount):
   self.set_frame(0 if amount == 0 else 1)

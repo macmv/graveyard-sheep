@@ -25,8 +25,8 @@ animations = [ {
 } ]
 
 [sub_resource type="CapsuleShape2D" id=2]
-radius = 17.784
-height = 31.642
+radius = 30.0013
+height = 84.3461
 
 [sub_resource type="AtlasTexture" id=3]
 flags = 4
@@ -53,30 +53,35 @@ script = ExtResource( 4 )
 rooms_scene = ExtResource( 3 )
 
 [node name="RigidBody2D" type="KinematicBody2D" parent="."]
-position = Vector2( 208.306, 188.455 )
+position = Vector2( 194.048, 190.814 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
 }
-speed = 200
+speed = 400.0
+friction_multiplier = 0.821
+moving_multiplier = 1.039
+acceleration_multiplier = 0.208
 sprite_path = NodePath("Player")
 wool_path = NodePath("../Wool")
 
 [node name="Player" type="AnimatedSprite" parent="RigidBody2D"]
-position = Vector2( -17.452, 11.436 )
-rotation = 0.139626
-scale = Vector2( 0.2, 0.2 )
+position = Vector2( -55.248, 29.427 )
+rotation = 0.18326
+scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 1 )
-frame = 4
+frame = 5
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
 rotation = 1.5708
 shape = SubResource( 2 )
 
+[node name="Area2D" type="Area2D" parent="RigidBody2D"]
+
 [node name="Zombie" type="Sprite" parent="."]
-position = Vector2( 333.156, 173.237 )
-scale = Vector2( 0.202986, 0.202986 )
+position = Vector2( 712.513, 186.279 )
+scale = Vector2( 0.361547, 0.361547 )
 texture = SubResource( 3 )
 
 [node name="Wool" type="AnimatedSprite" parent="."]
