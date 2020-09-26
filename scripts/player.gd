@@ -45,3 +45,4 @@ func _physics_process(delta):
     attack_animation.frame = 0
     for body in collision_ray.get_overlapping_bodies():
       body.get_parent().remove_child(body)
+

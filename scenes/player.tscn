@@ -16,7 +16,7 @@
 [ext_resource path="res://assets/player/attack0001.png" type="Texture" id=14]
 [ext_resource path="res://assets/player/attack0000.png" type="Texture" id=15]
 
-[sub_resource type="Shader" id=7]
+[sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
 
 uniform float shadow_opacity;
@@ -35,14 +35,14 @@ void fragment() {
 }"
 custom_defines = ""
 
-[sub_resource type="ShaderMaterial" id=8]
-shader = SubResource( 7 )
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
 shader_param/shadow_opacity = 0.404
 shader_param/shadow_shade = 0.165
 shader_param/shadow_offset = Vector2( -0.051, 0.102 )
 shader_param/shadow_strech = Vector2( 1, 1.765 )
 
-[sub_resource type="SpriteFrames" id=1]
+[sub_resource type="SpriteFrames" id=3]
 animations = [ {
 "frames": [ ExtResource( 7 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 2 ), ExtResource( 1 ), ExtResource( 3 ) ],
 "loop": true,
@@ -50,11 +50,11 @@ animations = [ {
 "speed": 15.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=2]
+[sub_resource type="CapsuleShape2D" id=4]
 radius = 30.0013
 height = 84.3461
 
-[sub_resource type="SpriteFrames" id=3]
+[sub_resource type="SpriteFrames" id=5]
 animations = [ {
 "frames": [ ExtResource( 15 ), ExtResource( 14 ), ExtResource( 8 ), ExtResource( 11 ), ExtResource( 13 ), ExtResource( 9 ), ExtResource( 12 ), null ],
 "loop": false,
@@ -62,7 +62,7 @@ animations = [ {
 "speed": 24.0
 } ]
 
-[sub_resource type="OccluderPolygon2D" id=4]
+[sub_resource type="OccluderPolygon2D" id=6]
 polygon = PoolVector2Array( -47.75, -32.25, -57.75, -30.5, -65.75, -17.25, -72, 0.25, -68, 25.5, -56.75, 37.25, -23.25, 29.5, -17.25, 40.25, -2, 35, 19.75, 37.25, 15.75, 49.25, 29.25, 47.25, 36.75, 33.25, 56.25, 30.75, 72.75, 11.25, 74.25, -4.5, 55, -29.5, 41.25, -31.5, 27, -47.5, 25, -30.75, 4.75, -28.25, -5.5, -37.5, -24.75, -27 )
 
 [node name="Sheep" type="KinematicBody2D"]
@@ -79,14 +79,14 @@ collision_ray_path = NodePath("Hit trigger")
 attack_animation_path = NodePath("AttackAnimation")
 
 [node name="Player" type="AnimatedSprite" parent="."]
-material = SubResource( 8 )
+material = SubResource( 2 )
 position = Vector2( -55.248, 29.427 )
 scale = Vector2( 0.5, 0.5 )
-frames = SubResource( 1 )
+frames = SubResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708
-shape = SubResource( 2 )
+shape = SubResource( 4 )
 
 [node name="Hit trigger" type="Area2D" parent="."]
 collision_layer = 0
@@ -98,8 +98,8 @@ polygon = PoolVector2Array( 0, 0, 95, -75, 120, -50, 130, -30, 135, 0, 130, 30, 
 [node name="AttackAnimation" type="AnimatedSprite" parent="."]
 position = Vector2( 101.165, -12.63 )
 scale = Vector2( 0.755, 0.4 )
-frames = SubResource( 3 )
+frames = SubResource( 5 )
 script = ExtResource( 10 )
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
-occluder = SubResource( 4 )
+occluder = SubResource( 6 )

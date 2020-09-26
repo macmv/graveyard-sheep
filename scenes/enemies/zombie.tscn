@@ -1,9 +1,17 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://assets/sketch.png" type="Texture" id=1]
+[ext_resource path="res://assets/player/attack0002.png" type="Texture" id=2]
+[ext_resource path="res://assets/player/attack0003.png" type="Texture" id=3]
+[ext_resource path="res://assets/player/attack0005.png" type="Texture" id=4]
+[ext_resource path="res://assets/player/attack0004.png" type="Texture" id=5]
+[ext_resource path="res://assets/player/attack0000.png" type="Texture" id=6]
+[ext_resource path="res://assets/player/attack0001.png" type="Texture" id=7]
+[ext_resource path="res://scripts/enemy.gd" type="Script" id=9]
+[ext_resource path="res://scripts/attack-animation.gd" type="Script" id=10]
 
 [sub_resource type="AtlasTexture" id=1]
-flags = 4
+flags = 7
 atlas = ExtResource( 1 )
 region = Rect2( 760.209, 40.7223, 285.678, 457.086 )
 
@@ -11,8 +19,18 @@ region = Rect2( 760.209, 40.7223, 285.678, 457.086 )
 radius = 143.487
 height = 177.826
 
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 5 ), ExtResource( 4 ), null ],
+"loop": false,
+"name": "default",
+"speed": 15.0
+} ]
+
 [node name="Zombie" type="KinematicBody2D"]
 collision_layer = 2147483650
+script = ExtResource( 9 )
+attack_animation_path = NodePath("AttackAnimation")
 
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 0.361547, 0.361547 )
@@ -21,3 +39,9 @@ texture = SubResource( 1 )
 [node name="Collision" type="CollisionShape2D" parent="."]
 scale = Vector2( 0.361547, 0.361547 )
 shape = SubResource( 2 )
+
+[node name="AttackAnimation" type="AnimatedSprite" parent="."]
+position = Vector2( 88.0994, 0 )
+scale = Vector2( 0.343259, 0.343259 )
+frames = SubResource( 3 )
+script = ExtResource( 10 )

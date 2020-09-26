@@ -1,9 +1,8 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scripts/tile-map.gd" type="Script" id=1]
 [ext_resource path="res://scenes/player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/levels/1.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/enemies/zombie.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scripts/wool.gd" type="Script" id=7]
 [ext_resource path="res://scenes/rooms.tscn" type="PackedScene" id=8]
 [ext_resource path="res://resources/tileset.tres" type="TileSet" id=11]
@@ -39,7 +38,6 @@ size_flags_horizontal = 14
 size_flags_vertical = 0
 
 [node name="WoolMargin" type="MarginContainer" parent="CanvasLayer/Gui/Top/WoolHBox"]
-margin_top = -3.8147e-06
 margin_right = 90.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 50, 50 )
@@ -54,9 +52,8 @@ empty_texture = ExtResource( 15 )
 image_path = NodePath("WoolImage")
 
 [node name="WoolImage" type="TextureRect" parent="CanvasLayer/Gui/Top/WoolHBox/WoolMargin"]
-margin_left = 19.0
-margin_top = -3.8147e-06
-margin_right = 69.0
+margin_left = 20.0
+margin_right = 70.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 50, 50 )
 size_flags_horizontal = 4
@@ -67,6 +64,7 @@ expand = true
 
 [node name="Background" parent="." instance=ExtResource( 3 )]
 position = Vector2( 0.943848, 0 )
+player_path = NodePath("../player")
 
 [node name="player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 962.121, 537.68 )
@@ -80,9 +78,6 @@ limit_top = 0
 limit_right = 1920
 limit_smoothed = true
 smoothing_enabled = true
-
-[node name="zombie" parent="." instance=ExtResource( 5 )]
-position = Vector2( 533.648, 198.671 )
 
 [node name="Map" type="TileMap" parent="."]
 visible = false
