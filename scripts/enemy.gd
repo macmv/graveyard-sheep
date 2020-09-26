@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 export var speed = 150
-export var attack_range = 150
+export var attack_range = 200
 export var nav_path : NodePath
 onready var nav = get_node(nav_path)
 export var attack_animation_path : NodePath
@@ -25,6 +25,7 @@ func _process(delta):
     distance_to_walk -= distance_to_next_point
 
   if nav.distance_to_player(position) < attack_range && !attack_animation.playing:
+    nav.damage_player(position, 1)
     attack_animation.show()
     attack_animation.play()
     attack_animation.frame = 0

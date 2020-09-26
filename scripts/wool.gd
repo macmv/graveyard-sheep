@@ -7,6 +7,7 @@ export var image_path     : NodePath
 onready var image = get_node(image_path)
 
 var children = []
+var current = 0
 
 func _ready():
   set_filled(true)
@@ -24,6 +25,7 @@ func set_total(amount):
       self.get_parent().remove_child(inst)
 
 func set_amount(amount):
+  current = amount
   set_filled(amount >= children.size() + 1)
   var i = 0
   for j in range(children.size() - 1, -1, -1):
@@ -35,3 +37,7 @@ func set_filled(filled):
     image.set_texture(filled_texture)
   else:
     image.set_texture(empty_texture)
+
+func remove(amount):
+  current -= amount
+  set_amount(current)

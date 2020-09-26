@@ -73,12 +73,11 @@ __meta__ = {
 friction_multiplier = 0.821
 moving_multiplier = 1.039
 acceleration_multiplier = 0.208
-sprite_path = NodePath("Player")
-wool_path = NodePath("../Wool")
+sprite_path = NodePath("Sprite")
 collision_ray_path = NodePath("Hit trigger")
 attack_animation_path = NodePath("AttackAnimation")
 
-[node name="Player" type="AnimatedSprite" parent="."]
+[node name="Sprite" type="AnimatedSprite" parent="."]
 material = SubResource( 2 )
 position = Vector2( -55.248, 29.427 )
 scale = Vector2( 0.5, 0.5 )

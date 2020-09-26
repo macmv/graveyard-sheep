@@ -1,8 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scripts/tile-map.gd" type="Script" id=1]
 [ext_resource path="res://scenes/player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/levels/1.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scripts/main.gd" type="Script" id=4]
+[ext_resource path="res://scripts/camera.gd" type="Script" id=5]
 [ext_resource path="res://scripts/wool.gd" type="Script" id=7]
 [ext_resource path="res://scenes/rooms.tscn" type="PackedScene" id=8]
 [ext_resource path="res://resources/tileset.tres" type="TileSet" id=11]
@@ -10,6 +12,7 @@
 [ext_resource path="res://assets/ui/wool/empty.png" type="Texture" id=15]
 
 [node name="Root" type="Node2D"]
+script = ExtResource( 4 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -64,20 +67,21 @@ expand = true
 
 [node name="Background" parent="." instance=ExtResource( 3 )]
 position = Vector2( 0.943848, 0 )
-player_path = NodePath("../player")
+player_path = NodePath("../Player")
 
-[node name="player" parent="." instance=ExtResource( 2 )]
+[node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 962.121, 537.68 )
-sprite_path = NodePath("../player/Player")
-wool_path = NodePath("../CanvasLayer/Gui/Top/WoolHBox/WoolMargin")
+collision_ray_path = NodePath("../Player/Hit trigger")
+attack_animation_path = NodePath("../Player/AttackAnimation")
 
-[node name="Camera2D" type="Camera2D" parent="player"]
+[node name="Camera2D" type="Camera2D" parent="Player"]
 current = true
 limit_left = 0
 limit_top = 0
 limit_right = 1920
 limit_smoothed = true
 smoothing_enabled = true
+script = ExtResource( 5 )
 
 [node name="Map" type="TileMap" parent="."]
 visible = false
