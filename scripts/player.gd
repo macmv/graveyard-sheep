@@ -8,9 +8,9 @@ export(float) var knockback_amount        = 2
 export(NodePath) var sprite_path
 export(NodePath) var collision_ray_path
 export(NodePath) var attack_animation_path
-onready var sprite           = get_node(sprite_path)           as AnimatedSprite
-onready var collision_ray    = get_node(collision_ray_path)    as AnimatedSprite
-onready var attack_animation = get_node(attack_animation_path) as AnimatedSprite
+onready var sprite           = get_node(sprite_path)
+onready var collision_ray    = get_node(collision_ray_path)
+onready var attack_animation = get_node(attack_animation_path)
 var wool
 var camera
 var vel = Vector2(0, 0)
