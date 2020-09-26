@@ -82,6 +82,8 @@ limit_right = 1920
 limit_smoothed = true
 smoothing_enabled = true
 script = ExtResource( 5 )
+shake_start = 5.0
+shake_decrease = 1.0
 
 [node name="Map" type="TileMap" parent="."]
 visible = false
