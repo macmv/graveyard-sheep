@@ -6,6 +6,7 @@ export(float) var moving_multiplier       = 1.04
 export(float) var acceleration_multiplier = 0.2
 export(float) var knockback_amount        = 10
 export(float) var attack_range            = 140
+export(float) var view_distance           = 1000
 
 export var nav_path : NodePath
 export var attack_animation_path : NodePath
@@ -17,14 +18,9 @@ var vel = Vector2(0, 0)
 var health = 5
 
 func _physics_process(delta):
-  path = nav.get_path_to_player(position)
-  path.remove(0)
-  var distance_to_next_point = position.distance_to(path[0])
-  print(distance_to_next_point)
-  if distance_to_next_point < 0.01:
-    position = path[0]
-    path.remove(0)
-  else:
+  if nav.distance_to_player(position) < view_distance:
+    path = nav.get_path_to_player(position)
+    path.remove(0) # First point is always the enemy's position
     var move_vec = position.direction_to(path[0]).normalized()
     vel += move_vec * acceleration_multiplier
     vel *= moving_multiplier
