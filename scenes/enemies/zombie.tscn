@@ -24,7 +24,7 @@ animations = [ {
 "frames": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 5 ), ExtResource( 4 ), null ],
 "loop": false,
 "name": "default",
-"speed": 15.0
+"speed": 7.0
 } ]
 
 [node name="Zombie" type="KinematicBody2D"]

@@ -5,6 +5,7 @@ export(float) var friction_multiplier     = 0.82
 export(float) var moving_multiplier       = 1.04
 export(float) var acceleration_multiplier = 0.2
 export(float) var knockback_amount        = 2
+
 export(NodePath) var sprite_path
 export(NodePath) var collision_ray_path
 export(NodePath) var attack_animation_path
@@ -34,9 +35,10 @@ func _physics_process(delta):
     attack_animation.play()
     attack_animation.frame = 0
     for body in collision_ray.get_overlapping_bodies():
-      body.get_parent().remove_child(body)
+      body.damage(position, 1)
+      wool.add(1)
 
 func damage(from_pos, amount):
-  wool.remove(amount)
+  wool.add(-amount)
   vel += (position - from_pos).normalized() * knockback_amount
   camera.on_hurt()

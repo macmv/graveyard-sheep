@@ -38,6 +38,5 @@ func set_filled(filled):
   else:
     image.set_texture(empty_texture)
 
-func remove(amount):
-  current -= amount
-  set_amount(current)
+func add(amount):
+  set_amount(current + amount)
