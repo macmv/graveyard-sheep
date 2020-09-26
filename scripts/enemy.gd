@@ -33,8 +33,8 @@ func _physics_process(delta):
     attack_animation.play()
     attack_animation.frame = 0
 
-
 func damage(from_pos, amount):
   health -= amount
   vel += (position - from_pos).normalized() * amount * knockback_amount
-
+  if health <= 0:
+    get_parent().remove_child(self)
