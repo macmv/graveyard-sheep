@@ -17,6 +17,8 @@ func _physics_process(delta):
   if dash_time > 0:
     dash_time -= delta
     if dash_time < 0:
+      $DashAnimation.playing = false
+      $DashAnimation.hide()
       dash_time = 0
     vel += dash_vec * dash_speed
   else:
@@ -34,7 +36,7 @@ func _physics_process(delta):
 
   if dash_time == 0 && Input.is_action_just_pressed("attack") && move_vec.length_squared() > 1e-05:
     $DashAnimation.show()
-    $DashAnimation.play()
+    $DashAnimation.playing = true
     $DashAnimation.frame = 0
     $Sprite.play()
     dash_time = dash_length

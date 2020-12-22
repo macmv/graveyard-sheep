@@ -15,7 +15,7 @@ var health = 5
 var player
 
 func _ready():
-  player = get_node("../" + get_parent().player_path)
+  player = get_parent().get_node(get_parent().player_path)
 
 func _physics_process(delta):
   var move_vec = (player.position - position).normalized()
