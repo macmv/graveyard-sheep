@@ -1,10 +1,8 @@
 extends KinematicBody2D
 
-export(float) var speed                   = 400
-export(float) var friction_multiplier     = 0.82
-export(float) var moving_multiplier       = 1.04
-export(float) var acceleration_multiplier = 0.2
-export(float) var knockback_amount        = 2
+export(float) var speed            = 50
+export(float) var friction         = 0.85
+export(float) var knockback_amount = 2
 
 export(NodePath) var sprite_path
 export(NodePath) var collision_ray_path
@@ -23,11 +21,10 @@ func _physics_process(delta):
   if move_vec.length_squared() > 1e-05:
     sprite.play()
     rotation = -move_vec.angle_to(Vector2(1, 0))
-    vel += move_vec * acceleration_multiplier
-    vel *= moving_multiplier
+    vel += move_vec
   else:
     sprite.stop()
-  vel *= friction_multiplier
+  vel *= friction
   move_and_slide(vel * speed)
 
   if Input.is_action_just_pressed("attack"):

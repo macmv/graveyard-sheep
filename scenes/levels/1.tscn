@@ -24,7 +24,6 @@ void light() {
   LIGHT = LIGHT_COLOR;
 }
 "
-custom_defines = ""
 
 [sub_resource type="Curve" id=2]
 _data = [ Vector2( 0, 0.994369 ), 0.0, -1.17123, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
@@ -219,4 +218,3 @@ navpoly = SubResource( 13 )
 
 [node name="Zombie" parent="." instance=ExtResource( 3 )]
 position = Vector2( 462.985, 416.369 )
-nav_path = NodePath("../Navigation2D")

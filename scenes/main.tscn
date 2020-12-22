@@ -11,16 +11,16 @@
 [node name="Root" type="Node2D"]
 script = ExtResource( 4 )
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="GUI" type="CanvasLayer" parent="."]
 
-[node name="Gui" type="MarginContainer" parent="CanvasLayer"]
+[node name="Gui" type="MarginContainer" parent="GUI"]
 margin_right = 1920.0
 margin_bottom = 1080.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Top" type="MarginContainer" parent="CanvasLayer/Gui"]
+[node name="Top" type="MarginContainer" parent="GUI/Gui"]
 margin_right = 1920.0
 margin_bottom = 100.0
 size_flags_vertical = 0
@@ -28,7 +28,7 @@ custom_constants/margin_right = 50
 custom_constants/margin_top = 50
 custom_constants/margin_left = 50
 
-[node name="WoolHBox" type="HBoxContainer" parent="CanvasLayer/Gui/Top"]
+[node name="WoolHBox" type="HBoxContainer" parent="GUI/Gui/Top"]
 margin_left = 1780.0
 margin_top = 50.0
 margin_right = 1870.0
@@ -37,7 +37,7 @@ rect_min_size = Vector2( 0, 50 )
 size_flags_horizontal = 14
 size_flags_vertical = 0
 
-[node name="WoolMargin" type="MarginContainer" parent="CanvasLayer/Gui/Top/WoolHBox"]
+[node name="WoolMargin" type="MarginContainer" parent="GUI/Gui/Top/WoolHBox"]
 margin_right = 90.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 50, 50 )
@@ -49,9 +49,9 @@ custom_constants/margin_left = 20
 script = ExtResource( 7 )
 filled_texture = ExtResource( 13 )
 empty_texture = ExtResource( 15 )
-image_path = NodePath("WoolImage")
+image_path = NodePath("../../../../../GUI/Gui/Top/WoolHBox/WoolMargin/WoolImage")
 
-[node name="WoolImage" type="TextureRect" parent="CanvasLayer/Gui/Top/WoolHBox/WoolMargin"]
+[node name="WoolImage" type="TextureRect" parent="GUI/Gui/Top/WoolHBox/WoolMargin"]
 margin_left = 20.0
 margin_right = 70.0
 margin_bottom = 50.0
@@ -63,7 +63,6 @@ texture = ExtResource( 15 )
 expand = true
 
 [node name="Background" parent="." instance=ExtResource( 3 )]
-position = Vector2( 0.943848, 0 )
 player_path = NodePath("../Player")
 
 [node name="Player" parent="." instance=ExtResource( 2 )]

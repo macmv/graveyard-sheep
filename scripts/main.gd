@@ -1,7 +1,7 @@
 extends Node2D
 
 func _ready():
-  var wool = $CanvasLayer/Gui/Top/WoolHBox/WoolMargin
+  var wool = $GUI/Gui/Top/WoolHBox/WoolMargin
   wool.set_total(5)
   wool.set_amount(5)
   $Player.wool = wool
