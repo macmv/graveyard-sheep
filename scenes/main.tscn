@@ -67,8 +67,6 @@ player_path = NodePath("../Player")
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 962.121, 537.68 )
-collision_ray_path = NodePath("../Player/Hit trigger")
-attack_animation_path = NodePath("../Player/AttackAnimation")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 current = true
