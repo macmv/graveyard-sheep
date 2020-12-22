@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://assets/player/walk0004.png" type="Texture" id=1]
 [ext_resource path="res://assets/player/walk0003.png" type="Texture" id=2]
@@ -10,31 +10,6 @@
 [ext_resource path="res://assets/player/attack0002.png" type="Texture" id=8]
 [ext_resource path="res://assets/player/attack0001.png" type="Texture" id=14]
 [ext_resource path="res://assets/player/attack0000.png" type="Texture" id=15]
-
-[sub_resource type="Shader" id=1]
-code = "shader_type canvas_item;
-
-uniform float shadow_opacity;
-uniform float shadow_shade;
-uniform vec2 shadow_offset;
-uniform vec2 shadow_strech;
-
-void fragment() {
-  vec4 color = texture(TEXTURE, UV);
-  vec4 shadow_color = texture(TEXTURE, (UV + shadow_offset) / shadow_strech);
-  if (color.a != 1.0) {
-    COLOR = color + vec4(vec3(shadow_shade), shadow_color.a * shadow_opacity);
-  } else {
-    COLOR = color;
-  }
-}"
-
-[sub_resource type="ShaderMaterial" id=2]
-shader = SubResource( 1 )
-shader_param/shadow_opacity = 0.404
-shader_param/shadow_shade = 0.165
-shader_param/shadow_offset = Vector2( -0.051, 0.102 )
-shader_param/shadow_strech = Vector2( 1, 1.765 )
 
 [sub_resource type="SpriteFrames" id=3]
 animations = [ {
@@ -63,8 +38,8 @@ polygon = PoolVector2Array( -47.75, -32.25, -57.75, -30.5, -65.75, -17.25, -72, 
 script = ExtResource( 6 )
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
-material = SubResource( 2 )
 position = Vector2( -55.248, 29.427 )
+rotation = 0.171121
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 3 )
 
@@ -81,8 +56,8 @@ polygon = PoolVector2Array( 0, 0, 95, -75, 120, -50, 130, -30, 135, 0, 130, 30, 
 
 [node name="DashAnimation" type="AnimatedSprite" parent="."]
 visible = false
-position = Vector2( -98.9192, -1.03523 )
-scale = Vector2( 0.330453, 0.210916 )
+position = Vector2( -146.116, 2.33597 )
+scale = Vector2( 0.355737, 0.205465 )
 frames = SubResource( 5 )
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
