@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
-export(float) var speed            = 50
-export(float) var friction         = 0.85
+export(float) var speed            = 120
+export(float) var friction         = 0.8
 export(float) var knockback_amount = 2
 
 export(NodePath) var sprite_path
