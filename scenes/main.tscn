@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scenes/levels/1.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/levels/0.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scripts/main.gd" type="Script" id=4]
 [ext_resource path="res://scripts/camera.gd" type="Script" id=5]
 [ext_resource path="res://scripts/wool.gd" type="Script" id=7]
@@ -63,10 +63,11 @@ texture = ExtResource( 15 )
 expand = true
 
 [node name="Background" parent="." instance=ExtResource( 3 )]
+scale = Vector2( 1, 1 )
 player_path = NodePath("../Player")
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 962.121, 537.68 )
+position = Vector2( 1008.04, 866.745 )
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 current = true
