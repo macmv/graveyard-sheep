@@ -67,13 +67,15 @@ scale = Vector2( 1, 1 )
 player_path = NodePath("../Player")
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 1008.04, 866.745 )
+position = Vector2( 924.04, 782.745 )
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 current = true
+zoom = Vector2( 0.8, 0.8 )
 limit_left = 0
 limit_top = 0
 limit_right = 1920
+limit_bottom = 3146
 limit_smoothed = true
 smoothing_enabled = true
 script = ExtResource( 5 )
