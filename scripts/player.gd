@@ -6,11 +6,13 @@ export(float) var knockback_amount = 2
 export(float) var dash_length      = 0.5
 export(float) var dash_speed       = 300
 
-var wool
+var wool_sprite
 var camera
 var vel = Vector2(0, 0)
 var dash_time = 0
 var dash_vec = Vector2(0, 0)
+var max_wool = 5
+var wool = max_wool
 
 func _physics_process(delta):
   var move_vec = Vector2(0, 0)
@@ -41,9 +43,16 @@ func _physics_process(delta):
   if dash_time > 0:
     for body in $HitTrigger.get_overlapping_bodies():
       if body.damage(position, 1):
-        wool.add(1)
+        set_wool(wool + 1)
 
 func damage(from_pos, amount):
-  wool.add(-amount)
+  set_wool(wool - amount)
   vel += (position - from_pos).normalized() * knockback_amount
   camera.on_hurt()
+
+func set_wool(amount):
+  wool = amount
+  if wool < 0:
+    wool = 0
+  var value = float(wool) / max_wool
+  wool_sprite.material.set_shader_param("value", 1 - value)
