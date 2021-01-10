@@ -40,8 +40,8 @@ func _physics_process(delta):
 
   if dash_time > 0:
     for body in $HitTrigger.get_overlapping_bodies():
-      body.damage(position, 1)
-      wool.add(1)
+      if body.damage(position, 1):
+        wool.add(1)
 
 func damage(from_pos, amount):
   wool.add(-amount)

@@ -13,9 +13,11 @@ var path = PoolVector2Array()
 var vel = Vector2(0, 0)
 var health = 5
 var player
+var iframes = 0
 
 func _ready():
   player = get_parent().get_node(get_parent().player_path)
+  $Health.text = str(health)
 
 func _physics_process(delta):
   var move_vec = (player.position - position).normalized()
@@ -30,8 +32,19 @@ func _physics_process(delta):
     attack_animation.play()
     attack_animation.frame = 0
 
-func damage(from_pos, amount):
-  health -= amount
-  vel += (position - from_pos).normalized() * amount * knockback_amount
-  if health <= 0:
-    get_parent().remove_child(self)
+  if iframes > 0:
+    iframes -= delta
+  if iframes < 0:
+    iframes = 0
+
+func damage(from_pos, amount) -> bool:
+  if iframes > 0:
+    return false
+  else:
+    iframes = 0.3
+    health -= amount
+    $Health.text = str(health)
+    vel += (position - from_pos).normalized() * amount * knockback_amount
+    if health <= 0:
+      get_parent().remove_child(self)
+    return true

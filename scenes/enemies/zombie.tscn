@@ -10,7 +10,7 @@
 [sub_resource type="CircleShape2D" id=1]
 radius = 200.0
 
-[sub_resource type="SpriteFrames" id=5]
+[sub_resource type="SpriteFrames" id=2]
 animations = [ {
 "frames": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 2 ), null ],
 "loop": false,
@@ -34,5 +34,15 @@ shape = SubResource( 1 )
 [node name="AttackAnimation" type="AnimatedSprite" parent="."]
 position = Vector2( 88.0994, 0 )
 scale = Vector2( 0.343259, 0.343259 )
-frames = SubResource( 5 )
+frames = SubResource( 2 )
 script = ExtResource( 10 )
+
+[node name="Health" type="Label" parent="."]
+margin_left = -32.3745
+margin_top = -124.873
+margin_right = 7.62549
+margin_bottom = -110.873
+text = "12"
+__meta__ = {
+"_edit_use_anchors_": false
+}
