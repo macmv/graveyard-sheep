@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/walk0001.png-66c9d8e2ba6fe55f3704820ec3c3d007.stex"
+path="res://.import/blink0004.png-0b3786aa8d53b02e49ed0064e489294c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/player/walk0001.png"
-dest_files=[ "res://.import/walk0001.png-66c9d8e2ba6fe55f3704820ec3c3d007.stex" ]
+source_file="res://assets/player/blink/blink0004.png"
+dest_files=[ "res://.import/blink0004.png-0b3786aa8d53b02e49ed0064e489294c.stex" ]
 
 [params]
 
