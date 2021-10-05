@@ -58,7 +58,7 @@ animations = [ {
 radius = 30.0013
 height = 84.3461
 
-[sub_resource type="OccluderPolygon2D" id=4]
+[sub_resource type="OccluderPolygon2D" id=3]
 polygon = PoolVector2Array( -47.75, -32.25, -57.75, -30.5, -65.75, -17.25, -72, 0.25, -68, 25.5, -56.75, 37.25, -23.25, 29.5, -17.25, 40.25, -2, 35, 19.75, 37.25, 15.75, 49.25, 29.25, 47.25, 36.75, 33.25, 56.25, 30.75, 72.75, 11.25, 74.25, -4.5, 55, -29.5, 41.25, -31.5, 27, -47.5, 25, -30.75, 4.75, -28.25, -5.5, -37.5, -24.75, -27 )
 
 [node name="Sheep" type="KinematicBody2D"]
@@ -69,7 +69,7 @@ position = Vector2( -11.461, -7.59123 )
 scale = Vector2( 0.155284, 0.155284 )
 frames = SubResource( 1 )
 animation = "idle"
-frame = 6
+frame = 5
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -85,4 +85,4 @@ polygon = PoolVector2Array( 0, 0, 95, -75, 120, -50, 130, -30, 135, 0, 130, 30, 
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 position = Vector2( 0.594604, 0 )
-occluder = SubResource( 4 )
+occluder = SubResource( 3 )

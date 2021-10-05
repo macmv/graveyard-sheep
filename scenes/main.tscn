@@ -7,7 +7,7 @@
 [ext_resource path="res://assets/ui/wool/full.png" type="Texture" id=13]
 [ext_resource path="res://assets/ui/wool/empty.png" type="Texture" id=15]
 
-[sub_resource type="Shader" id=3]
+[sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
 
 uniform sampler2D full;
@@ -27,8 +27,8 @@ void fragment() {
   }
 }"
 
-[sub_resource type="ShaderMaterial" id=4]
-shader = SubResource( 3 )
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
 shader_param/value = 0.0
 shader_param/fade = 0.03
 shader_param/full = ExtResource( 13 )
@@ -39,9 +39,9 @@ script = ExtResource( 4 )
 [node name="GUI" type="CanvasLayer" parent="."]
 
 [node name="Wool" type="Sprite" parent="GUI"]
-material = SubResource( 4 )
-position = Vector2( 1599.69, 176.702 )
-scale = Vector2( 0.301372, 0.301372 )
+material = SubResource( 2 )
+position = Vector2( 948.311, 150.244 )
+scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 15 )
 
 [node name="Background" parent="." instance=ExtResource( 3 )]
@@ -50,6 +50,7 @@ player_path = NodePath("../Player")
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 924.04, 782.745 )
+scale = Vector2( 1.4, 1.4 )
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 current = true
